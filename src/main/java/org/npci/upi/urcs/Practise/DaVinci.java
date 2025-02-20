@@ -11,35 +11,27 @@ public class DaVinci {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
-//		for (String a : args) {
-//			long epochSeconds = Long.valueOf(a.trim());
-//			Instant instant = Instant.ofEpochMilli(epochSeconds);
-//			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-//					.withZone(ZoneId.systemDefault());
-//			String formattedTimestamp = formatter.format(instant);
-//e
-//			System.out.println(formattedTimestamp);
-//		}
-
-//		System.out.println(removeElement(new int[] { 3, 2, 2, 3 }, 3));
-
-//		System.out.println(searchInsert(new int[] { 3,6,7,8,10}, 5));
-		merge(new int[] {4,5,6,0,0,0}, 3, new int[] {1,2,3}, 3);
+//		Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+//		nums1 = [1], m = 1, nums2 = [], n = 0
+//		nums1 = [0], m = 0, nums2 = [1], n = 1
+		merge(new int[] {0}, 0, new int[] {1}, 1);
 
 	}
 	
     public static void merge(int[] nums1, int m, int[] nums2, int n) {
     	int j=0;
         int temp =0;
-    	
+    	int length=m-1;
+		int ptr1=0;
+		int[] dupe = nums1;
 
 		if(nums1.length!=0 && nums2.length!=0 ){
 
-			for(int i=0;i<=m+n-1;i++) {
+			for(int i=0;i<=length;i++) {
     		
-				if(nums1[i] <= nums2[j]) {
-					if(nums1[i]!=0) {
+				if(dupe[i] <= nums2[j]) {
+					if(dupe[i]!=0) {
+						length++;
 					}else {
 						nums1[i]=nums2[j];
 						j++;
@@ -48,16 +40,11 @@ public class DaVinci {
 				}else {
                     temp = nums1[i];
 					nums1[i]=nums2[j++];
-					nums1[i+1]=temp;
-					i++;
+					nums1[m+ptr1++]=temp;
+
 				}
 			}
 		}
-
-
-
-		
-    	
     	System.out.println(Arrays.toString(nums1));
         
     }
