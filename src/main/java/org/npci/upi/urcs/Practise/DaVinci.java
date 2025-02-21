@@ -14,35 +14,45 @@ public class DaVinci {
 //		Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
 //		nums1 = [1], m = 1, nums2 = [], n = 0
 //		nums1 = [0], m = 0, nums2 = [1], n = 1
-		merge(new int[] {0}, 0, new int[] {1}, 1);
+//		merge(new int[] {4,5,6,0,0,0}, 3, new int[] {1,2,3}, 3);
+		merge(new int[] {1,2,3,0,0,0}, 3, new int[] {2,5,6}, 3);
 
 	}
+
+	public static void mergeNew(int[] nums1, int m, int[] nums2, int n) {
+
+		int ptr1=m-1;
+		int 
+
+
+
+	}
+
 	
     public static void merge(int[] nums1, int m, int[] nums2, int n) {
     	int j=0;
         int temp =0;
     	int length=m-1;
 		int ptr1=0;
-		int[] dupe = nums1;
-
+		int[] dupe = nums1.clone();
 		if(nums1.length!=0 && nums2.length!=0 ){
-
-			for(int i=0;i<=length;i++) {
-    		
-				if(dupe[i] <= nums2[j]) {
-					if(dupe[i]!=0) {
-						length++;
+			if(m!=0){
+				for(int i=0;i<=length;i++) {
+					if(dupe[i] <= nums2[j]) {
+						if(dupe[i]!=0) {
+							length++;
+						}else {
+							nums1[i]=nums2[j];
+							j++;
+						}
 					}else {
-						nums1[i]=nums2[j];
-						j++;
+						temp = nums1[i];
+						nums1[i]=nums2[j++];
+						nums1[m+ptr1++]=temp;
 					}
-					
-				}else {
-                    temp = nums1[i];
-					nums1[i]=nums2[j++];
-					nums1[m+ptr1++]=temp;
-
 				}
+			}else{
+				nums1[0]=nums2[0];
 			}
 		}
     	System.out.println(Arrays.toString(nums1));
