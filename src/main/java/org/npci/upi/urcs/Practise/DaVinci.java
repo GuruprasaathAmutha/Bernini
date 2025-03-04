@@ -15,16 +15,37 @@ public class DaVinci {
 //		nums1 = [1], m = 1, nums2 = [], n = 0
 //		nums1 = [0], m = 0, nums2 = [1], n = 1
 //		merge(new int[] {4,5,6,0,0,0}, 3, new int[] {1,2,3}, 3);
-		merge(new int[] {1,2,3,0,0,0}, 3, new int[] {2,5,6}, 3);
+//		merge(new int[] {1}, 1, new int[] {}, 0);
+// 		merge(new int[] {0}, 0, new int[] {1}, 1);
+
+		mergeNew(new int[] {1,2,3,0,0,0}, 3, new int[] {2,5,6}, 3);
 
 	}
 
 	public static void mergeNew(int[] nums1, int m, int[] nums2, int n) {
 
+
 		int ptr1=m-1;
-		int 
+		int ptr2 =n-1;
+
+		int ptr3=nums1.length-1;
 
 
+		if(m!=0){
+			for(int i=0;i<=m-1;i++){
+				if(nums1[ptr1]>nums2[ptr2]){
+					nums1[ptr3]=nums1[ptr1];
+					nums1[ptr1--]=nums2[ptr2--];
+				}else{
+					nums1[ptr3--]=nums2[ptr2--];
+					ptr1--;
+				}
+			}
+		}else{
+			nums1[0]=nums2[0];
+		}
+
+		System.out.println(Arrays.toString(nums1));
 
 	}
 
