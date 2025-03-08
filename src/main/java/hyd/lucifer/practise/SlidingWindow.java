@@ -1,4 +1,4 @@
-package org.npci.upi.urcs.Practise;
+package hyd.lucifer.practise;
 
 public class SlidingWindow {
 

@@ -1,4 +1,4 @@
-package org.npci.upi.urcs.Practise;
+package hyd.lucifer.practise;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,7 +37,7 @@ public class DaVinci {
 
         if (k == 1 && almiss[0] != almiss[1]) {
             for (int i = 0; i < nums.length - 1; i++) {
-                
+
             }
         } else if (almiss[0] == almiss[1] && k != 1 && nums.length == k) {
             return almiss[0];
