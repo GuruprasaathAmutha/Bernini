@@ -1,27 +1,58 @@
 package hyd.lucifer.practise;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
 public class DaVinci {
+
+    private static final Logger log = LoggerFactory.getLogger(DaVinci.class);
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
 //		mergeNew(new int[] {1,2,3,0,0,0}, 3, new int[] {2,5,6}, 3);  [3,9,7,2,1,7], k = 4
-//        System.out.println(largestInteger(new int[]{3, 9, 2, 1, 7}, 3));
-//        System.out.println(largestInteger(new int[]{3, 9, 7, 2, 1, 7}, 4));
-//        System.out.println(largestInteger(new int[]{0, 0}, 1));
-//        System.out.println(largestInteger(new int[]{3, 1, 7, 10, 0}, 1));
+//        System.out.println(largestIntegerSlidingWindow(new int[]{3, 9, 2, 1, 7}, 3));
+//        System.out.println(largestIntegerSlidingWindow(new int[]{3, 9, 7, 2, 1, 7}, 4));
+//        System.out.println(largestIntegerSlidingWindow(new int[]{0, 0}, 2));
+        System.out.println(largestIntegerSlidingWindow(new int[]{6, 4, 5, 2, 11, 2, 9, 1, 0}, 7));
 //        System.out.println(largestInteger(new int[]{4, 4, 2, 2, 2, 0, 5, 3, 4, 4}, 3));
-        System.out.println(largestInteger(new int[]{7, 5, 9, 10, 0, 12, 3, 12, 10}, 1));
+//        System.out.println(largestInteger(new int[]{7, 5, 9, 10, 0, 12, 3, 12, 10}, 1));
+//        System.out.println(largestInteger(new int[]{7, 11, 7, 7}, 1));
 
     }
 
     public static int largestIntegerSlidingWindow(int[] nums, int k) {
+        int sus = nums[0];
+        int ptr1 = 0;
+        int ptr2 = k - 1;
+        Stack<Integer> result = new Stack<>();
+        List<Integer> dupe = new ArrayList<>();
+        for (int i = 0; i < nums.length - k + 1; i++) {
+            for (int j = ptr1; j <= ptr2; j++) {
+                if (sus <= nums[j]) {
+                    if (!result.contains(nums[j]) || k == nums.length) {
+                        result.push(nums[j]);
+                        sus = nums[j];
 
+                    } else {
+                        dupe.add(nums[j]);
+                        result.removeElement(nums[j]);
+                        sus = result.isEmpty() ? -1 : result.peek();
+                    }
 
-        return -1;
+                }
+            }
+            ptr1++;
+            ptr2++;
+        }
+        for (int d : dupe) {
+            result.removeElement(d);
+        }
+        return result.isEmpty() ? -1 : result.pop();
     }
 
 
@@ -35,10 +66,20 @@ public class DaVinci {
         int counter2 = 0;
         int res = 0;
 
-        if (k == 1 && almiss[0] != almiss[1]) {
-            for (int i = 0; i < nums.length - 1; i++) {
+        if (k == 1) {
+            Stack<Integer> resStack = new Stack<>();
+            res = nums[0];
+            for (int i = 0; i <= nums.length - 1; i++) {
+                if (res < nums[i]) {
+                    if (!resStack.contains(nums[i])) {
+                        resStack.push(nums[i]);
+                    } else {
+                        resStack.removeElement(nums[i]);
+                    }
 
+                }
             }
+            return resStack.pop();
         } else if (almiss[0] == almiss[1] && k != 1 && nums.length == k) {
             return almiss[0];
         } else if (nums.length == k) {
