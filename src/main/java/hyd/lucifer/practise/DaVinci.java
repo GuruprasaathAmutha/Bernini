@@ -18,11 +18,29 @@ public class DaVinci {
 //        System.out.println(largestIntegerSlidingWindow(new int[]{3, 9, 2, 1, 7}, 3));
 //        System.out.println(largestIntegerSlidingWindow(new int[]{3, 9, 7, 2, 1, 7}, 4));
 //        System.out.println(largestIntegerSlidingWindow(new int[]{0, 0}, 2));
-        System.out.println(largestIntegerSlidingWindow(new int[]{6, 4, 5, 2, 11, 2, 9, 1, 0}, 7));
+//        System.out.println(largestIntegerSlidingWindow(new int[]{6, 4, 5, 2, 11, 2, 9, 1, 0}, 7));
 //        System.out.println(largestInteger(new int[]{4, 4, 2, 2, 2, 0, 5, 3, 4, 4}, 3));
 //        System.out.println(largestInteger(new int[]{7, 5, 9, 10, 0, 12, 3, 12, 10}, 1));
 //        System.out.println(largestInteger(new int[]{7, 11, 7, 7}, 1));
+        System.out.println(generate(5).size());
+    }
 
+
+    public static List<List<Integer>> generate(int numRows) {
+        List<Integer> inner;
+        List<List<Integer>> result = new ArrayList<>();
+        for (int i = 0; i <= numRows - 1; i++) {
+            inner = new ArrayList<>();
+            inner.add(1);
+            for (int j = 1; j < i; j++) {
+                inner.add(result.get(i - 1).get(j - 1) + result.get(i - 1).get(j));
+            }
+            if (i >= 1) {
+                inner.add(1);
+            }
+            result.add(inner);
+        }
+        return result;
     }
 
     public static int largestIntegerSlidingWindow(int[] nums, int k) {
@@ -43,7 +61,6 @@ public class DaVinci {
                         result.removeElement(nums[j]);
                         sus = result.isEmpty() ? -1 : result.peek();
                     }
-
                 }
             }
             ptr1++;
