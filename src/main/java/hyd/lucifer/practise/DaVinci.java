@@ -21,10 +21,49 @@ public class DaVinci {
 //        System.out.println(largestIntegerSlidingWindow(new int[]{6, 4, 5, 2, 11, 2, 9, 1, 0}, 7));
 //        System.out.println(largestInteger(new int[]{4, 4, 2, 2, 2, 0, 5, 3, 4, 4}, 3));
 //        System.out.println(largestInteger(new int[]{7, 5, 9, 10, 0, 12, 3, 12, 10}, 1));
-//        System.out.println(largestInteger(new int[]{7, 11, 7, 7}, 1));
-        System.out.println(generate(5).size());
+////        System.out.println(largestInteger(new int[]{7, 11, 7, 7}, 1));
+//        System.out.println(getRow(1));
+//        System.out.println(getRow(2));
+//        System.out.println(getRow(3));
+//        System.out.println(getRow(4));
+//        System.out.println(getRow(5));
+//        System.out.println(getRow(6));
+//        System.out.println(getRow(7));
+//        System.out.println(getRow(8));
+        System.out.println(maxProfit(new int[]{7, 6, 4, 3, 2,}));
     }
 
+    public static int maxProfit(int[] prices) {
+        int buy = 0;
+        int sell = 1;
+        int profit = 0;
+        for (int i = 0; i < prices.length - 1; i++) {
+            if (prices[buy] > prices[sell]) {
+                buy = sell;
+                sell = sell + 1;
+            } else {
+                if (prices[sell] - prices[buy] > profit) {
+                    profit = prices[sell] - prices[buy];
+                    sell++;
+                } else {
+                    sell++;
+                }
+            }
+        }
+        return profit;
+    }
+
+
+    public static List<Integer> getRow(int rowIndex) {
+        List<Integer> res = new ArrayList<>();
+        long val = 1;
+        res.add(1);
+        for (int i = 1; i <= rowIndex; i++) {
+            val = val * (rowIndex - i + 1) / i;
+            res.add((int) val);
+        }
+        return res;
+    }
 
     public static List<List<Integer>> generate(int numRows) {
         List<Integer> inner;
