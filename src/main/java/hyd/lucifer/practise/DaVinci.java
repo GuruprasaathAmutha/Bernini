@@ -3,10 +3,7 @@ package hyd.lucifer.practise;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class DaVinci {
 
@@ -30,7 +27,59 @@ public class DaVinci {
 //        System.out.println(getRow(6));
 //        System.out.println(getRow(7));
 //        System.out.println(getRow(8));
-        System.out.println(maxProfit(new int[]{7, 6, 4, 3, 2,}));
+//        System.out.println(maxProfit(new int[]{7, 6, 4, 3, 2,}));
+//        System.out.println(majorityElement(new int[]{3, 2, 3}));
+//        System.out.println(majorityElement(new int[]{2, 2, 1, 1, 1, 2, 2}));
+        System.out.println(containsDuplicate(new int[]{1, 2, 3, 4}));
+    }
+
+    public static boolean containsDuplicate(int[] nums) {
+
+//        List<Integer> a = new ArrayList<>();
+        Set<Integer> a = new HashSet<>();
+        for (int i = 0; i <= nums.length - 1; i++) {
+            if (!a.contains(nums[i])) {
+                a.add(nums[i]);
+            } else {
+                a.clear();
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public static int majorityElement(int[] nums) {
+        int target = nums.length / 2;
+        int res = 0;
+        Map<Integer, Integer> count = new HashMap<>();
+        for (int i = 0; i <= nums.length - 1; i++) {
+            if (!count.containsKey(nums[i])) {
+                count.put(nums[i], 1);
+            } else {
+                count.put(nums[i], count.get(nums[i]) + 1);
+            }
+        }
+//        System.out.println(target);
+        for (int i : count.keySet()) {
+            if (count.get(i) > target) {
+                res = i;
+            }
+        }
+        return res;
+    }
+
+
+    public int singleNumber(int[] nums) {
+        Stack<Integer> res = new Stack<>();
+        for (int i : nums) {
+            if (!res.contains(i)) {
+                res.add(i);
+            } else {
+                res.removeElement(i);
+            }
+        }
+        return res.pop();
     }
 
     public static int maxProfit(int[] prices) {
