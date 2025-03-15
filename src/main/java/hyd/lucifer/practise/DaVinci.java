@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class DaVinci {
 
@@ -31,9 +32,60 @@ public class DaVinci {
 //        System.out.println(majorityElement(new int[]{3, 2, 3}));
 //        System.out.println(majorityElement(new int[]{2, 2, 1, 1, 1, 2, 2}));
 //        System.out.println(containsDuplicateII(new int[]{1, 0, 1, 1}, 1));
-        summaryRanges(new int[]{0, 2, 3, 4, 6, 8, 9}).forEach(System.out::println);
+//        summaryRanges(new int[]{0, 2, 3, 4, 6, 8, 9}).forEach(System.out::println);
+//        System.out.println(missingnumberoptimal(new int[]{9, 6, 4, 2, 3, 5, 7, 0, 1}));
+        Arrays.stream(moveZeroes(new int[]{0})).forEach(System.out::println);
     }
 
+
+    public static int[] moveZeroes(int[] nums) {
+        int ptr1 = -1;
+        int ptr2 = -1;
+        for (int i = 0; i <= nums.length - 1; i++) {
+            if (nums[i] == 0) {
+                if (i == 0) {
+                    ptr1 = i;
+                    ptr2 = i + 1;
+                } else if (nums[i - 1] == 0) {
+                    ptr2++;
+                } else {
+                    ptr1 = i;
+                    ptr2 = i + 1;
+                }
+            } else {
+                if (ptr1 != -1 && ptr2 != -1) {
+                    nums[ptr1] = nums[ptr2];
+                    nums[ptr2] = 0;
+                    ptr1++;
+                    ptr2 = i + 1;
+                }
+            }
+        }
+        return nums;
+    }
+
+    public static int missingnumberoptimal(int[] nums) {
+        int n = nums.length;
+        int x1 = 0, x2 = 0;
+        for (int i = 1; i <= n; i++) {
+            x1 ^= i;
+            x2 ^= nums[i - 1];
+        }
+        return x1 ^ x2;
+    }
+
+
+    public static int missingNumber(int[] nums) {
+        Set<Integer> n = Arrays.stream(nums).boxed().collect(Collectors.toSet());
+        for (int i = 1; i <= nums.length; i++) {
+            if (n.contains(i)) {
+                n.remove(i);
+            } else {
+                return i;
+            }
+        }
+        return 0;
+    }
 
     public static List<String> summaryRanges(int[] nums) {
         StringBuffer s;
