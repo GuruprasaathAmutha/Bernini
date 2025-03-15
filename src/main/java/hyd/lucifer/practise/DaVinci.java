@@ -30,19 +30,25 @@ public class DaVinci {
 //        System.out.println(maxProfit(new int[]{7, 6, 4, 3, 2,}));
 //        System.out.println(majorityElement(new int[]{3, 2, 3}));
 //        System.out.println(majorityElement(new int[]{2, 2, 1, 1, 1, 2, 2}));
-        System.out.println(containsDuplicate(new int[]{1, 2, 3, 4}));
+        System.out.println(containsDuplicateII(new int[]{1, 0, 1, 1}, 1));
     }
 
-    public static boolean containsDuplicate(int[] nums) {
 
-//        List<Integer> a = new ArrayList<>();
-        Set<Integer> a = new HashSet<>();
+    public static List<String> summaryRanges(int[] nums) {
+        
+        return null;
+    }
+
+    public static boolean containsDuplicateII(int[] nums, int k) {
+        Map<Integer, Integer> res = new HashMap<>();
         for (int i = 0; i <= nums.length - 1; i++) {
-            if (!a.contains(nums[i])) {
-                a.add(nums[i]);
+            if (!res.containsKey(nums[i])) {
+                res.put(nums[i], i);
             } else {
-                a.clear();
-                return true;
+                if (Math.abs(res.get(nums[i]) - i) <= k) {
+                    return true;
+                }
+                res.put(nums[i], i);
             }
         }
         return false;
