@@ -30,13 +30,53 @@ public class DaVinci {
 //        System.out.println(maxProfit(new int[]{7, 6, 4, 3, 2,}));
 //        System.out.println(majorityElement(new int[]{3, 2, 3}));
 //        System.out.println(majorityElement(new int[]{2, 2, 1, 1, 1, 2, 2}));
-        System.out.println(containsDuplicateII(new int[]{1, 0, 1, 1}, 1));
+//        System.out.println(containsDuplicateII(new int[]{1, 0, 1, 1}, 1));
+        summaryRanges(new int[]{0, 2, 3, 4, 6, 8, 9}).forEach(System.out::println);
     }
 
 
     public static List<String> summaryRanges(int[] nums) {
-        
-        return null;
+        StringBuffer s;
+        List<String> res = new ArrayList<>();
+        int ptr1 = 0;
+        for (int i = 0; i <= nums.length - 1; i++) {
+            if (i != nums.length - 1) {
+                if (nums[i] + 1 != nums[i + 1]) {
+                    if (i != ptr1) {
+                        s = new StringBuffer();
+                        s.append(nums[ptr1]);
+                        s.append("->");
+                        s.append(nums[i]);
+                        res.add(s.toString());
+                        ptr1 = i + 1;
+                    } else {
+                        s = new StringBuffer();
+                        s.append(nums[ptr1]);
+                        res.add(s.toString());
+                        ptr1 = i + 1;
+                    }
+                }
+            } else {
+                if (i != ptr1) {
+                    if (nums[i] - 1 != nums[i - 1]) {
+                        s = new StringBuffer();
+                        s.append(nums[i]);
+                        res.add(s.toString());
+                    } else {
+                        s = new StringBuffer();
+                        s.append(nums[ptr1]);
+                        s.append("->");
+                        s.append(nums[i]);
+                        res.add(s.toString());
+                    }
+                } else {
+                    s = new StringBuffer();
+                    s.append(nums[i]);
+                    res.add(s.toString());
+                }
+            }
+        }
+        return res;
     }
 
     public static boolean containsDuplicateII(int[] nums, int k) {
