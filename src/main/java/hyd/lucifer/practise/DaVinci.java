@@ -34,7 +34,47 @@ public class DaVinci {
 //        System.out.println(containsDuplicateII(new int[]{1, 0, 1, 1}, 1));
 //        summaryRanges(new int[]{0, 2, 3, 4, 6, 8, 9}).forEach(System.out::println);
 //        System.out.println(missingnumberoptimal(new int[]{9, 6, 4, 2, 3, 5, 7, 0, 1}));
-        Arrays.stream(moveZeroes(new int[]{0})).forEach(System.out::println);
+//        Arrays.stream(moveZeroes(new int[]{0})).forEach(System.out::println);
+//        System.out.println(removeDigit("1231", '1'));
+//        System.out.println(minJumps(new int[]{9, 10, 1, 2, 3, 4, 8, 0, 0, 0, 0, 0, 0, 0, 1}));
+//        System.out.println(minJumps(new int[]{1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9}));
+        System.out.println(minJumps(new int[]{1, 4, 3, 2, 6, 7}));
+//        System.out.println(minJumps(new int[]{0, 10, 20}));
+    }
+
+
+    static int minJumps(int[] arr) {
+        int ptr1 = 0;
+        int ptr2 = arr[0];
+        int jumps = 0;
+        for (int i = 0; i <= arr.length - 1; i++) {
+            if (ptr2 != 0) {
+                if (ptr1 + ptr2 >= arr.length - 1) {
+                    return ++jumps;
+                } else {
+                    ptr1 = ptr1 + ptr2;
+                    ptr2 = arr[ptr1];
+                    jumps++;
+                }
+            } else {
+                return -1;
+            }
+        }
+        return 0;
+    }
+
+
+    public static String removeDigit(String number, char digit) {
+        StringBuilder sb = new StringBuilder();
+        char[] n = number.toCharArray();
+        for (int i = 0; i <= n.length - 1; i++) {
+            if (n[i] != digit) {
+
+            } else {
+
+            }
+        }
+        return sb.toString();
     }
 
 
