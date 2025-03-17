@@ -38,8 +38,68 @@ public class DaVinci {
 //        System.out.println(removeDigit("1231", '1'));
 //        System.out.println(minJumps(new int[]{9, 10, 1, 2, 3, 4, 8, 0, 0, 0, 0, 0, 0, 0, 1}));
 //        System.out.println(minJumps(new int[]{1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9}));
-        System.out.println(minJumps(new int[]{1, 4, 3, 2, 6, 7}));
-//        System.out.println(minJumps(new int[]{0, 10, 20}));
+//        System.out.println(minJumps(new int[]{1, 4, 3, 2, 6, 7}));
+//        System.out.println(minJumps(new int[]{0, 10, 20})); 4,9,5], nums2 = [9,4,9,8,4]
+//        System.out.println(Arrays.toString(intersectionOne(new int[]{1, 2, 2, 1}, new int[]{2, 2})));
+        System.out.println(Arrays.toString(intersectionOne(new int[]{4, 9, 5}, new int[]{9, 4, 9, 8, 4})));
+
+    }
+
+    // Try to refactor this!
+    public static int[] intersectionOne(int[] nums1, int[] nums2) {
+        Set<Integer> numsone = new HashSet<>(Arrays.stream(nums1).boxed().collect(Collectors.toList()));
+        Set<Integer> numstwo = new HashSet<>(Arrays.stream(nums2).boxed().collect(Collectors.toList()));
+        List<Integer> res = new ArrayList<>();
+        if (numsone.size() > numstwo.size()) {
+            for (int i : numstwo) {
+                if (numsone.contains(i)) {
+                    res.add(i);
+                }
+            }
+        } else {
+            for (int i : numsone) {
+                if (numstwo.contains(i)) {
+                    res.add(i);
+                }
+            }
+        }
+        int[] rs = new int[res.size()];
+        for (int i = 0; i <= res.size() - 1; i++) {
+            rs[i] = res.get(i);
+        }
+        return rs;
+    }
+
+    public static int[] intersection(int[] nums1, int[] nums2) {
+
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int ptr1 = 0;
+        int ptr2 = 0;
+        Stack<Integer> s = new Stack<>();
+        for (int i = 0; i <= (Math.min(nums1.length, nums2.length)) - 1; i++) {
+            if (nums1[ptr1] <= nums2[ptr2]) {
+                if (nums1[ptr1] == nums2[ptr2]) {
+                    if (!s.contains(nums1[ptr1])) {
+                        s.add(nums1[ptr1]);
+                    }
+                    ptr1++;
+                    ptr2++;
+                } else {
+                    ptr1++;
+                }
+            } else {
+                i = i - 1;
+                ptr2++;
+            }
+        }
+        int size = s.size();
+        int[] result = new int[size];
+        for (int i = 0; i <= size - 1; i++) {
+            result[i] = s.pop();
+        }
+
+        return result;
     }
 
 
