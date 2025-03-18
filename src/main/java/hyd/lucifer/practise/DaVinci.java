@@ -41,9 +41,28 @@ public class DaVinci {
 //        System.out.println(minJumps(new int[]{1, 4, 3, 2, 6, 7}));
 //        System.out.println(minJumps(new int[]{0, 10, 20})); 4,9,5], nums2 = [9,4,9,8,4]
 //        System.out.println(Arrays.toString(intersectionOne(new int[]{1, 2, 2, 1}, new int[]{2, 2})));
-        System.out.println(Arrays.toString(intersectionOne(new int[]{4, 9, 5}, new int[]{9, 4, 9, 8, 4})));
+//        System.out.println(Arrays.toString(intersectionOne(new int[]{4, 9, 5}, new int[]{9, 4, 9, 8, 4})));
 
+        System.out.println(thirdMax(new int[]{5, 2, 2}));
     }
+
+
+    public static int thirdMax(int[] nums) {
+
+        int ptr = 0;
+        Stack<Integer> s = new Stack<>();
+        for (int i = 0; i <= nums.length - 1; i++) {
+            if (ptr == 2) {
+                return nums[i];
+            }
+            if (!s.contains(nums[i])) {
+                s.add(nums[i]);
+                ptr++;
+            }
+        }
+        return s.pop();
+    }
+
 
     // Try to refactor this!
     public static int[] intersectionOne(int[] nums1, int[] nums2) {
