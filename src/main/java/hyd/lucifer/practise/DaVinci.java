@@ -43,21 +43,54 @@ public class DaVinci {
 //        System.out.println(Arrays.toString(intersectionOne(new int[]{1, 2, 2, 1}, new int[]{2, 2})));
 //        System.out.println(Arrays.toString(intersectionOne(new int[]{4, 9, 5}, new int[]{9, 4, 9, 8, 4})));
 
-        System.out.println(thirdMax(new int[]{5, 2, 2}));
+//        System.out.println(thirdMaxNew(new int[]{3, 2, 1}));
+//        System.out.println(thirdMax(new int[]{1, 2}));
+//        System.out.println(thirdMaxNew(new int[]{2, 2, 3, 1}));
+//        System.out.println(thirdMaxNew(new int[]{5, 2, 2}));
+        System.out.println(thirdMaxNew(new int[]{1, 2, 2, 5, 3, 5}));
+
     }
 
 
-    public static int thirdMax(int[] nums) {
+    public static int thirdMaxNew(int[] nums) {
+        Stack<Integer> s = new Stack<>();
+        Arrays.sort(nums);
+        for (int i = nums.length - 1; i <= 0; i++) {
+            if (!s.contains(nums[i])) {
+                s.add(nums[i]);
+            }
+        }
+        if (s.size() == 3) {
+            int count = 1;
+            for (Integer i : s) {
+                if (count == 3) {
+                    return i;
+                }
+                count++;
+            }
+        } else {
+            int max = 0;
+            int size = s.size();
+            for (int i = 0; i <= size - 1; i++) {
+                max = Math.max(max, s.pop());
+            }
+            return max;
+        }
+        return s.pop();
+    }
 
+    public static int thirdMax(int[] nums) {
         int ptr = 0;
         Stack<Integer> s = new Stack<>();
         for (int i = 0; i <= nums.length - 1; i++) {
-            if (ptr == 2) {
+            if (ptr == 2 && !s.contains(nums[i])) {
                 return nums[i];
             }
             if (!s.contains(nums[i])) {
                 s.add(nums[i]);
                 ptr++;
+            } else {
+//                ptr--;
             }
         }
         return s.pop();
