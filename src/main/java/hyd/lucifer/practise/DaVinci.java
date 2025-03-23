@@ -47,8 +47,9 @@ public class DaVinci {
 //        System.out.println(thirdMax(new int[]{1, 2}));
 //        System.out.println(thirdMaxNew(new int[]{2, 2, 3, 1}));
 //        System.out.println(thirdMaxNew(new int[]{5, 2, 2}));
-        System.out.println(thirdMaxNew(new int[]{1, 2, 2, 5, 3, 5}));
-
+//        System.out.println(thirdMaxNew(new int[]{1, 2, 2, 5, 3, 5}));
+        System.out.println(1 / 3);
+        System.out.println(6 % 3);
     }
 
 
