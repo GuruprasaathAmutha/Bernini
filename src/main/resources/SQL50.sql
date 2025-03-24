@@ -33,3 +33,14 @@ insert into Queries (query_name, result, position, rating) values ('Cat', 'Siame
 insert into Queries (query_name, result, position, rating) values ('Cat', 'Sphynx', '7', '4');
 
  select query_name, avg((rating::decimal/position::decimal))::decimal(10,2) as quality, ((sum(case when rating < 3 then 1::decimal else 0::decimal(10,2) end)/count(*)::decimal(10,2))*100)::decimal(10,2) as poor_query_percentage from queries group by query_name;
+
+
+
+-- 1193. Monthly Transactions I
+
+ Create table If Not Exists Transactions (id int, country varchar(4), state enum('approved', 'declined'), amount int, trans_date date)
+ Truncate table Transactions
+ insert into Transactions (id, country, state, amount, trans_date) values ('121', 'US', 'approved', '1000', '2018-12-18')
+ insert into Transactions (id, country, state, amount, trans_date) values ('122', 'US', 'declined', '2000', '2018-12-19')
+ insert into Transactions (id, country, state, amount, trans_date) values ('123', 'US', 'approved', '2000', '2019-01-01')
+ insert into Transactions (id, country, state, amount, trans_date) values ('124', 'DE', 'approved', '2000', '2019-01-07')
