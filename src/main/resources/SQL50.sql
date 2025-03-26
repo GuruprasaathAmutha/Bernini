@@ -44,3 +44,36 @@ insert into Queries (query_name, result, position, rating) values ('Cat', 'Sphyn
  insert into Transactions (id, country, state, amount, trans_date) values ('122', 'US', 'declined', '2000', '2018-12-19')
  insert into Transactions (id, country, state, amount, trans_date) values ('123', 'US', 'approved', '2000', '2019-01-01')
  insert into Transactions (id, country, state, amount, trans_date) values ('124', 'DE', 'approved', '2000', '2019-01-07')
+
+ select  month,country,sum(trans_count) as trans_count,sum(approved_count) as approved_count,  sum(trans_total_amount) as trans_total_amount,sum(app_amount) as approved_total_amount from ( select to_char(trans_date,'YYYY/MM') as month,country,count(*) as trans_count,case when state='approved' then count(*) end approved_count,case when state='declined' then count(*) end declined_count, case when state='approved' then sum(amount) end app_amount, case when state='declined' then sum(amount) end declined_amt ,sum(amount) as trans_total_amount from transactions group by month ,state,country) a group by month,country;
+
+ -- 1174. Immediate Food Delivery II
+ Create table If Not Exists Delivery (delivery_id int, customer_id int, order_date date, customer_pref_delivery_date date);
+ Truncate table Delivery;
+ insert into Delivery (delivery_id, customer_id, order_date, customer_pref_delivery_date) values ('1', '1', '2019-08-01', '2019-08-02');
+ insert into Delivery (delivery_id, customer_id, order_date, customer_pref_delivery_date) values ('2', '2', '2019-08-02', '2019-08-02');
+ insert into Delivery (delivery_id, customer_id, order_date, customer_pref_delivery_date) values ('3', '1', '2019-08-11', '2019-08-12');
+ insert into Delivery (delivery_id, customer_id, order_date, customer_pref_delivery_date) values ('4', '3', '2019-08-24', '2019-08-24');
+ insert into Delivery (delivery_id, customer_id, order_date, customer_pref_delivery_date) values ('5', '3', '2019-08-21', '2019-08-22');
+ insert into Delivery (delivery_id, customer_id, order_date, customer_pref_delivery_date) values ('6', '2', '2019-08-11', '2019-08-13');
+ insert into Delivery (delivery_id, customer_id, order_date, customer_pref_delivery_date) values ('7', '4', '2019-08-09', '2019-08-09');
+
+ select round( ((select count(*) from (select customer_id,min(order_date) f_order_date,min(customer_pref_delivery_date) f_customer_pref_delivery_date from Delivery group by customer_id order by customer_id) a where a.f_order_date=a.f_customer_pref_delivery_date)::decimal(10,2) / (select count(*) from (select customer_id,min(order_date) f_order_date,min(customer_pref_delivery_date) f_customer_pref_delivery_date from Delivery group by customer_id order by customer_id) a ))::decimal(10,2) * 100,2) immediate_percentage;
+
+
+Create table If Not Exists Activity (player_id int, device_id int, event_date date, games_played int);
+Truncate table Activity;
+insert into Activity (player_id, device_id, event_date, games_played) values ('1', '2', '2016-03-01', '5');
+insert into Activity (player_id, device_id, event_date, games_played) values ('1', '2', '2016-03-02', '6');
+insert into Activity (player_id, device_id, event_date, games_played) values ('2', '3', '2017-06-25', '1');
+insert into Activity (player_id, device_id, event_date, games_played) values ('3', '1', '2016-03-02', '0');
+insert into Activity (player_id, device_id, event_date, games_played) values ('3', '4', '2018-07-03', '5');
+
+
+
+insert into Activity values ('1', '2', '2016-03-01', '5') ;
+insert into Activity values ('1', '2', '2016-03-02', '1') ;
+insert into Activity values ('3', '1', '2016-01-02', '10') ;
+insert into Activity values ('3', '4', '2016-01-03', '15') ;
+
+
