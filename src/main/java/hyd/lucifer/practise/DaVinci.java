@@ -48,10 +48,21 @@ public class DaVinci {
 //        System.out.println(thirdMaxNew(new int[]{2, 2, 3, 1}));
 //        System.out.println(thirdMaxNew(new int[]{5, 2, 2}));
 //        System.out.println(thirdMaxNew(new int[]{1, 2, 2, 5, 3, 5}));
-        System.out.println(1 / 3);
-        System.out.println(6 % 3);
+//        System.out.println(1 / 3);
+//        System.out.println(6 % 3);
+        System.out.println(findDisappearedNumbers(new int[]{4, 3, 2, 7, 8, 2, 3, 1}));
     }
 
+    public static List<Integer> findDisappearedNumbers(int[] nums) {
+        Arrays.sort(nums);
+        List<Integer> res = new ArrayList<Integer>();
+        for (int i = 1; i <= nums.length - 1; i++) {
+            if (i != nums[i]) {
+                res.add(i);
+            }
+        }
+        return res;
+    }
 
     public static int thirdMaxNew(int[] nums) {
         Stack<Integer> s = new Stack<>();
