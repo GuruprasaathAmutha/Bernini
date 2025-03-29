@@ -56,8 +56,9 @@ public class DaVinci {
     public static List<Integer> findDisappearedNumbers(int[] nums) {
         Arrays.sort(nums);
         List<Integer> res = new ArrayList<Integer>();
-        for (int i = 1; i <= nums.length - 1; i++) {
-            if (i != nums[i]) {
+        Set<Integer> nm = new HashSet<>(Arrays.stream(nums).boxed().collect(Collectors.toList()));
+        for (int i = 1; i <= nm.size(); i++) {
+            if (!nm.contains(i)) {
                 res.add(i);
             }
         }

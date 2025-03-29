@@ -76,4 +76,10 @@ insert into Activity values ('1', '2', '2016-03-02', '1') ;
 insert into Activity values ('3', '1', '2016-01-02', '10') ;
 insert into Activity values ('3', '4', '2016-01-03', '15') ;
 
+with cte as (select count(distinct player_id) as active_user from (select *,
+rank() over (partition by player_id order by event_date asc) as rank,
+lag(event_date) over(partition by player_id order by event_date asc) as lag_date
+from activity) as x where x.rank <=2 and event_date = lag_date + interval '1 day'),
+cte2 as (select count(distinct player_id) as total_user from activity)
 
+select ROUND(active_user*1.0/total_user,2) as fraction from cte,cte2;   -- Need to check this!
