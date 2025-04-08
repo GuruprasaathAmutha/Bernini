@@ -50,8 +50,29 @@ public class DaVinci {
 //        System.out.println(thirdMaxNew(new int[]{1, 2, 2, 5, 3, 5}));
 //        System.out.println(1 / 3);
 //        System.out.println(6 % 3);
-        System.out.println(findDisappearedNumbers(new int[]{4, 3, 2, 7, 8, 2, 3, 1}));
+//         g = [1,2,3], s = [1,1]
+//         g = [1,2], s = [1,2,3]
+//        System.out.println(findDisappearedNumbers(new int[]{4, 3, 2, 7, 8, 2, 3, 1}));
+//        System.out.println(findContentChildren(new int[]{1, 2, 3}, new int[]{1, 1}));
+        System.out.println(findContentChildren(new int[]{10, 9, 8, 7, 10, 9, 8, 7}, new int[]{10, 9, 8, 7}));
     }
+
+
+    public static int findContentChildren(int[] g, int[] s) {
+        int count = 0;
+        Arrays.sort(g);
+        Arrays.sort(s);
+        int gi = 0;
+        int si = 0;
+        Set<Integer> slist = Arrays.stream(s).boxed().collect(Collectors.toSet());
+        for (int i = 0; i < g.length; i++) {
+            if (s[i] >= s[i]) {
+
+            }
+        }
+        return count;
+    }
+
 
     public static List<Integer> findDisappearedNumbers(int[] nums) {
         Arrays.sort(nums);
