@@ -1,5 +1,6 @@
 package hyd.lucifer.practise;
 
+import hyd.lucifer.builders.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,7 +55,10 @@ public class DaVinci {
 //         g = [1,2], s = [1,2,3]
 //        System.out.println(findDisappearedNumbers(new int[]{4, 3, 2, 7, 8, 2, 3, 1}));
 //        System.out.println(findContentChildren(new int[]{1, 2, 3}, new int[]{1, 1}));
-        System.out.println(findContentChildren(new int[]{10, 9, 8, 7, 10, 9, 8, 7}, new int[]{10, 9, 8, 7}));
+//        System.out.println(findContentChildren(new int[]{10, 9, 8, 7, 10, 9, 8, 7}, new int[]{10, 9, 8, 7}));
+
+        Person p = new Person("144", "Dayne", "Arthur", "6379923836");
+        p.main(new String[]{"guru", "prasaath"});
     }
 
 
