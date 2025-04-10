@@ -57,8 +57,8 @@ public class DaVinci {
 //        System.out.println(findContentChildren(new int[]{1, 2, 3}, new int[]{1, 1}));
 //        System.out.println(findContentChildren(new int[]{10, 9, 8, 7, 10, 9, 8, 7}, new int[]{10, 9, 8, 7}));
 
-        Person p = new Person("144", "Dayne", "Arthur", "6379923836");
-        p.main(new String[]{"guru", "prasaath"});
+        Person p = new Person.PersonBuilder().setFirstname("Guruprasaath").setPhoneNumber("6379923836").getPerson();
+        System.out.println(p.toString());
     }
 
 

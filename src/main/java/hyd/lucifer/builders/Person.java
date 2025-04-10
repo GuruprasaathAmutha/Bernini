@@ -15,6 +15,16 @@ public class Person {
         PhoneNumber = phoneNumber;
     }
 
+    @Override
+    public String toString() {
+        return "Person{" +
+                "Firstname='" + Firstname + '\'' +
+                ", Lastname='" + Lastname + '\'' +
+                ", PhoneNumber='" + PhoneNumber + '\'' +
+                ", Address='" + Address + '\'' +
+                '}';
+    }
+
     public String getName() {
         return Firstname + " " + Lastname;
     }
@@ -27,18 +37,37 @@ public class Person {
     }
 
 
-//    public class Builder {
-//
-//        private String Firstname;
-//        private String Lastname;
-//        private String PhoneNumber;
-//        private String Address;
-//
-//        public Builder() {
-//
-//        }
-//
-//    }
+    public static class PersonBuilder {
+
+        private String Firstname;
+        private String Lastname;
+        private String PhoneNumber;
+        private String Address;
+
+        public PersonBuilder setLastname(String lastname) {
+            Lastname = lastname;
+            return this;
+        }
+
+        public PersonBuilder setFirstname(String firstname) {
+            Firstname = firstname;
+            return this;
+        }
+
+        public PersonBuilder setPhoneNumber(String phoneNumber) {
+            PhoneNumber = phoneNumber;
+            return this;
+        }
+
+        public PersonBuilder setAddress(String address) {
+            Address = address;
+            return this;
+        }
+
+        public Person getPerson() {
+            return new Person(Address, Lastname, Firstname, PhoneNumber);
+        }
+    }
 
 
 }
